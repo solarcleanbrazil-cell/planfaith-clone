@@ -213,18 +213,12 @@
   const $ = id => document.getElementById(id);
 
   /* ---- checkout ---- */
-  /* Teste Stripe-direto encerrado 21/08 — de volta à KashPay (UTMify, upsell
-     e entrega automática funcionam de novo). Payment Links do teste, se
-     precisar: 27 …G00 · 47 …G04 · 77 …G02 · 100 …G03 em buy.stripe.com */
-  /* Trocado 22/08 a pedido do Pedro — checkout em pay.mycheckoutt.com.
-     Links KashPay anteriores, se precisar reverter:
-     27 → checkout-1786993025346 · 47 → checkout-1786993503203
-     77 → checkout-1786993549714 · 100 → checkout-1786993595986 */
+  /* Switched to KashPay + Stripe (live) checkout — 14/09 */
   const seedLinks = {
-    "27":  "https://pay.mycheckoutt.com/019f1a92-bbf1-718a-96d0-b106a67f0a93",
-    "47":  "https://pay.mycheckoutt.com/019ff874-098b-72ba-a15b-77a6e0fa1125",
-    "77":  "https://pay.mycheckoutt.com/01a0011b-25da-70ee-bd03-8af7f4daa053",
-    "87":  "https://pay.mycheckoutt.com/01a00116-190f-72f9-852d-127a912838ab",
+    "27":  "https://checkout.kashpay.com.br/checkout/checkout-1789402788319",
+    "47":  "https://checkout.kashpay.com.br/checkout/checkout-1789402919476",
+    "77":  "https://checkout.kashpay.com.br/checkout/checkout-1789403078486",
+    "87":  "https://checkout.kashpay.com.br/checkout/checkout-1789403312736",
   };
   /* The Legacy artwork file is still named …-100.jpg — only the price changed. */
   const seedImgs = { "27":"sedd-of-fath-27.jpg", "47":"seed-of-faith47.jpg", "77":"seed-of-fath-77.jpg", "87":"seed-of-faith-100.jpg" };
