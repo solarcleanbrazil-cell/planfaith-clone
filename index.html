@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TIME TO THRIVE</title><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','2068603490438052');fbq('track','PageView');</script>
+<title>TIME TO THRIVE</title>
+<!-- Google tag (gtag.js) — funnel analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GNW339EEG9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GNW339EEG9');
+</script>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   html, body { min-height:100%; }
@@ -603,7 +611,8 @@ function renderQuestion(){
 
 /* ============ FLOW AFTER AN ANSWER ============ */
 function afterAnswer(){
-  // track quiz progress (where people drop off) — browser only
+  // track quiz progress (where people drop off)
+  if(typeof gtag === 'function') gtag('event', 'quiz_question_answered', { question_index: current, question_tag: tagFor(current) });
   const key = unlockAfter[current];
   if(key){
     showUnlock(key, ()=>{ advance(); });
@@ -613,7 +622,10 @@ function afterAnswer(){
 }
 function advance(){
   current++;
-  if(current >= questions.length){ startLoading(); }
+  if(current >= questions.length){
+    if(typeof gtag === 'function') gtag('event', 'quiz_complete');
+    startLoading();
+  }
   else { renderQuestion(); }
 }
 
@@ -882,6 +894,7 @@ $('startBtn').onclick = ()=>{
   userName = v;
   $('affName').textContent = userName + ", before we continue...";
   show('affirmation');
+  if(typeof gtag === 'function') gtag('event', 'quiz_start');
 };
 $('nameInput').addEventListener('keydown', e=>{ if(e.key==='Enter') $('startBtn').click(); });
 
