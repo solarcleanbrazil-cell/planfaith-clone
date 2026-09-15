@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Divine Manifestation Script — Plan Faith</title><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','2068603490438052');fbq('track','PageView');fbq('track','ViewContent');</script>
+<title>Your Divine Manifestation Script — Plan Faith</title>
+<!-- Google tag (gtag.js) — funnel analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GNW339EEG9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GNW339EEG9');
+</script>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   html, body { min-height:100%; }
@@ -231,7 +239,11 @@
       '<button class="seed-cta checkout-btn" data-amt="'+a+'">This is the life I choose – $'+a+'</button>'+
     '</div>').join('');
   document.querySelectorAll('[data-amt]').forEach(b=>{
-    b.onclick = ()=>{ window.location.href = pfWithTracking(seedLinks[b.getAttribute('data-amt')]); };
+    b.onclick = ()=>{
+      const amt = b.getAttribute('data-amt');
+      if(typeof gtag === 'function') gtag('event', 'begin_checkout', { currency: 'USD', value: Number(amt) });
+      window.location.href = pfWithTracking(seedLinks[amt]);
+    };
   });
 
   /* ---- data for the "from quiz" enhanced version ---- */
@@ -264,6 +276,7 @@
   let state = null;
   try { state = JSON.parse(sessionStorage.getItem('planfaith_offer') || 'null'); } catch(e){}
   const fromQuiz = !!(state && state.fromQuiz);
+  if(typeof gtag === 'function') gtag('event', 'view_offer', { from_quiz: fromQuiz });
 
   /* ---- headline above the video: personalized whenever we know the name ---- */
   const N = (state && state.name ? String(state.name).trim() : "").toUpperCase();
